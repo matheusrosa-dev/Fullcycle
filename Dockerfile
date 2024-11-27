@@ -1,8 +1,8 @@
 FROM node:22-slim
 
-USER node
+WORKDIR /app
 
-WORKDIR /home/node/app
+EXPOSE 3333
 
-CMD ["tail", "-f", "/dev/null"]
-
+ENTRYPOINT [ "./.docker/docker-entrypoint.sh" ]
+# CMD [ "tail", "-f", "/dev/null" ]

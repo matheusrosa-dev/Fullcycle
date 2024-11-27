@@ -1,8 +1,12 @@
 services:
   app:
     build: .
-    command: ./.docker/start.sh
+    container_name: micro-videos-admin
     ports:
       - 3333:3333
     volumes:
-      - .:/home/node/app
+      - .:/app
+
+networks:
+  fullcycle:
+    driver: bridge
