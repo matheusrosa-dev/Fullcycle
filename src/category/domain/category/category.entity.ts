@@ -70,7 +70,7 @@ export class CategoryFactory {
       name: props.name,
       description: props?.description,
       is_active: props.is_active ?? true,
-      created_at: new Date(),
+      created_at: props?.created_at || new Date(),
     });
 
     Category.validate(category);

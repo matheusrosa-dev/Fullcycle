@@ -1,4 +1,3 @@
-import { EntityValidationError } from "../../../shared/domain/validators";
 import { Uuid } from "../../../shared/domain/value-objects";
 import { Category, CategoryFactory } from "../category/category.entity";
 
