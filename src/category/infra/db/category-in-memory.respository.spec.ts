@@ -9,7 +9,7 @@ describe("CategoryInMemoryRepository", () => {
 
   beforeEach(() => (repository = new CategoryInMemoryRepository()));
   it("should no filter items when filter object is null", async () => {
-    const items = [CategoryFactory.create({ name: "test" })];
+    const items = [CategoryFactory.fake().aCategory().build()];
     const filterSpy = jest.spyOn(items, "filter" as any);
 
     const itemsFiltered = await repository["applyFilter"](items, null);
@@ -19,9 +19,9 @@ describe("CategoryInMemoryRepository", () => {
 
   it("should filter items using filter parameter", async () => {
     const items = [
-      CategoryFactory.create({ name: "test" }),
-      CategoryFactory.create({ name: "TEST" }),
-      CategoryFactory.create({ name: "fake" }),
+      CategoryFactory.fake().aCategory().withName("test").build(),
+      CategoryFactory.fake().aCategory().withName("TEST").build(),
+      CategoryFactory.fake().aCategory().withName("fake").build(),
     ];
     const filterSpy = jest.spyOn(items, "filter" as any);
 
@@ -34,15 +34,21 @@ describe("CategoryInMemoryRepository", () => {
     const created_at = new Date();
 
     const items = [
-      CategoryFactory.create({ name: "test", created_at }),
-      CategoryFactory.create({
-        name: "TEST",
-        created_at: new Date(created_at.getTime() + 100),
-      }),
-      CategoryFactory.create({
-        name: "fake",
-        created_at: new Date(created_at.getTime() + 200),
-      }),
+      CategoryFactory.fake()
+        .aCategory()
+        .withName("test")
+        .withCreatedAt(created_at)
+        .build(),
+      CategoryFactory.fake()
+        .aCategory()
+        .withName("TEST")
+        .withCreatedAt(new Date(created_at.getTime() + 100))
+        .build(),
+      CategoryFactory.fake()
+        .aCategory()
+        .withName("fake")
+        .withCreatedAt(new Date(created_at.getTime() + 200))
+        .build(),
     ];
 
     const itemsSorted = await repository["applySort"](items, null, null);
@@ -51,9 +57,9 @@ describe("CategoryInMemoryRepository", () => {
 
   it("should sort by name", async () => {
     const items = [
-      CategoryFactory.create({ name: "c" }),
-      CategoryFactory.create({ name: "b" }),
-      CategoryFactory.create({ name: "a" }),
+      CategoryFactory.fake().aCategory().withName("c").build(),
+      CategoryFactory.fake().aCategory().withName("b").build(),
+      CategoryFactory.fake().aCategory().withName("a").build(),
     ];
 
     let itemsSorted = await repository["applySort"](items, "name", "asc");

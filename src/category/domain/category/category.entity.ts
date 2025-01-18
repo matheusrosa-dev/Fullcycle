@@ -1,6 +1,7 @@
 import { Entity } from "../../../shared/domain/entities";
 import { EntityValidationError } from "../../../shared/domain/validators";
 import { Uuid } from "../../../shared/domain/value-objects";
+import { CategoryFakeBuilder } from "./category-faker.builder";
 import { CategoryValidatorFactory } from "./category.validator";
 import { CategoryConstructorProps, CategoryCreateCommand } from "./types";
 
@@ -76,5 +77,9 @@ export class CategoryFactory {
     Category.validate(category);
 
     return category;
+  }
+
+  static fake() {
+    return CategoryFakeBuilder;
   }
 }
