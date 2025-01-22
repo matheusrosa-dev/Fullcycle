@@ -1,6 +1,6 @@
-import { Entity } from "../../../../domain/entities";
-import { NotFoundError } from "../../../../domain/errors";
-import { Uuid } from "../../../../domain/value-objects";
+import { Entity } from "../../../../domain/entities/entity";
+import { NotFoundError } from "../../../../domain/errors/not-found.error";
+import { Uuid } from "../../../../domain/value-objects/uuid.vo";
 import { InMemoryRepository } from "../in-memory.repository";
 
 type StubEntityConstructor = {

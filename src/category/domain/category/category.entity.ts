@@ -1,6 +1,6 @@
-import { Entity } from "../../../shared/domain/entities";
-import { EntityValidationError } from "../../../shared/domain/validators";
-import { Uuid } from "../../../shared/domain/value-objects";
+import { Entity } from "../../../shared/domain/entities/entity";
+import { EntityValidationError } from "../../../shared/domain/validators/validation-error";
+import { Uuid } from "../../../shared/domain/value-objects/uuid.vo";
 import { CategoryFakeBuilder } from "./category-faker.builder";
 import { CategoryValidatorFactory } from "./category.validator";
 import { CategoryConstructorProps, CategoryCreateCommand } from "./types";

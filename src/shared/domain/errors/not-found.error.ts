@@ -1,4 +1,4 @@
-import { Entity } from "../entities";
+import { Entity } from "../entities/entity";
 
 export class NotFoundError extends Error {
   constructor(id: any[] | any, entity: new (...args: any[]) => Entity) {

@@ -1,7 +1,7 @@
-import { DataType, Sequelize } from "sequelize-typescript";
-import { CategoryModel } from "../category.model";
-import { Uuid } from "../../../../../shared/domain/value-objects";
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
+import { DataType } from "sequelize-typescript";
+import { CategoryModel } from "../../category.model";
+import { setupSequelize } from "../../../../../../shared/infra/testing/helpers";
+import { Uuid } from "../../../../../../shared/domain/value-objects/uuid.vo";
 
 describe("CategoryModel Integration Tests", () => {
   setupSequelize({

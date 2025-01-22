@@ -1,9 +1,9 @@
-import { CategoryModel } from "../category.model";
-import { CategoryModelMapper } from "../category-model-mapper";
-import { Uuid } from "../../../../../shared/domain/value-objects/uuid.vo";
-import { EntityValidationError } from "../../../../../shared/domain/validators";
-import { Category } from "../../../../domain/category/category.entity";
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
+import { CategoryModel } from "../../category.model";
+import { CategoryModelMapper } from "../../category-model-mapper";
+import { Uuid } from "../../../../../../shared/domain/value-objects/uuid.vo";
+import { Category } from "../../../../../domain/category/category.entity";
+import { setupSequelize } from "../../../../../../shared/infra/testing/helpers";
+import { EntityValidationError } from "../../../../../../shared/domain/validators/validation-error";
 
 describe("CategoryModelMapper Integration Tests", () => {
   setupSequelize({

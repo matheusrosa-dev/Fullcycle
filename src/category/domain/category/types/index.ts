@@ -1,4 +1,4 @@
-import { Uuid } from "../../../../shared/domain/value-objects";
+import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
 
 export type CategoryConstructorProps = {
   category_id: Uuid;

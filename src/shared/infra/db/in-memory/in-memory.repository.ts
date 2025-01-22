@@ -1,4 +1,4 @@
-import { Entity } from "../../../domain/entities";
+import { Entity } from "../../../domain/entities/entity";
 import { NotFoundError } from "../../../domain/errors/not-found.error";
 import {
   IRepository,
@@ -9,7 +9,7 @@ import {
   SortDirection,
 } from "../../../domain/repository/search-params";
 import { SearchResult } from "../../../domain/repository/search-result";
-import { ValueObject } from "../../../domain/value-objects";
+import { ValueObject } from "../../../domain/value-objects/value-object";
 
 export abstract class InMemoryRepository<
   E extends Entity,

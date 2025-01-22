@@ -1,5 +1,5 @@
-import { Uuid } from "../../../shared/domain/value-objects";
-import { Category, CategoryFactory } from "../category/category.entity";
+import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
+import { Category, CategoryFactory } from "../../category/category.entity";
 
 describe("Category Unit Tests", () => {
   let validateSpy: jest.SpyInstance;

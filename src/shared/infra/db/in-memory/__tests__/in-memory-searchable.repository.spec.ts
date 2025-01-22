@@ -1,4 +1,4 @@
-import { Entity } from "../../../../domain/entities";
+import { Entity } from "../../../../domain/entities/entity";
 import { SearchParams } from "../../../../domain/repository/search-params";
 import { SearchResult } from "../../../../domain/repository/search-result";
 import { Uuid } from "../../../../domain/value-objects/uuid.vo";

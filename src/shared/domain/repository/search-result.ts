@@ -1,5 +1,5 @@
-import { Entity } from "../entities";
-import { ValueObject } from "../value-objects";
+import { Entity } from "../entities/entity";
+import { ValueObject } from "../value-objects/value-object";
 
 type SearchResultConstructorProps<E extends Entity> = {
   items: E[];
