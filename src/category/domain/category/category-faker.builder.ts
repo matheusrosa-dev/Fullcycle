@@ -5,7 +5,7 @@ import { Uuid } from "../../../shared/domain/value-objects";
 type PropOrFactory<T> = T | ((index: number) => T);
 
 export class CategoryFakeBuilder<TBuild = any> {
-  private _id: PropOrFactory<Uuid>;
+  private _category_id: PropOrFactory<Uuid>;
 
   private _name: PropOrFactory<string> = (_index) => this.chance.word();
 
@@ -34,7 +34,8 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   withUuid(valueOrFactory: PropOrFactory<Uuid>) {
-    this._id = valueOrFactory;
+    this._category_id = valueOrFactory;
+
     return this;
   }
 
@@ -73,7 +74,9 @@ export class CategoryFakeBuilder<TBuild = any> {
       .fill(undefined)
       .map((_, index) => {
         const category = new Category({
-          id: !this._id ? undefined : this.callFactory(this._id, index),
+          category_id: !this._category_id
+            ? undefined
+            : this.callFactory(this._category_id, index),
           name: this.callFactory(this._name, index),
           description: this.callFactory(this._description, index),
           is_active: this.callFactory(this._is_active, index),
@@ -89,8 +92,8 @@ export class CategoryFakeBuilder<TBuild = any> {
     return this.countObjs === 1 ? (categories[0] as any) : categories;
   }
 
-  get id() {
-    return this.getValue("id");
+  get category_id() {
+    return this.getValue("category_id");
   }
 
   get name() {
@@ -110,7 +113,7 @@ export class CategoryFakeBuilder<TBuild = any> {
   }
 
   private getValue(prop: any) {
-    const optional = ["id", "created_at"];
+    const optional = ["category_id", "created_at"];
     const privateProp = `_${prop}` as keyof this;
     if (!this[privateProp] && optional.includes(prop)) {
       throw new Error(

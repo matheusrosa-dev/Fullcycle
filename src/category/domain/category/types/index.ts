@@ -1,7 +1,7 @@
 import { Uuid } from "../../../../shared/domain/value-objects";
 
 export type CategoryConstructorProps = {
-  id: Uuid;
+  category_id: Uuid;
   name: string;
   description?: string;
   is_active: boolean;

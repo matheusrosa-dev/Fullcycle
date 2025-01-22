@@ -6,7 +6,7 @@ import { CategoryValidatorFactory } from "./category.validator";
 import { CategoryConstructorProps, CategoryCreateCommand } from "./types";
 
 export class Category extends Entity {
-  id: Uuid;
+  category_id: Uuid;
   name: string;
   description?: string;
   is_active: boolean;
@@ -14,15 +14,15 @@ export class Category extends Entity {
 
   constructor(props: CategoryConstructorProps) {
     super();
-    this.id = props.id;
+    this.category_id = props.category_id ?? new Uuid();
     this.name = props.name;
     this.description = props?.description ?? null;
     this.is_active = props.is_active;
-    this.created_at = props.created_at;
+    this.created_at = props.created_at ?? new Date();
   }
 
   get entity_id() {
-    return this.id;
+    return this.category_id;
   }
 
   changeName(name: string) {
@@ -55,7 +55,7 @@ export class Category extends Entity {
 
   toJSON() {
     return {
-      id: this.id.id,
+      category_id: this.category_id.id,
       name: this.name,
       description: this.description,
       is_active: this.is_active,
@@ -67,7 +67,7 @@ export class Category extends Entity {
 export class CategoryFactory {
   static create(props: CategoryCreateCommand) {
     const category = new Category({
-      id: new Uuid(),
+      category_id: new Uuid(),
       name: props.name,
       description: props?.description,
       is_active: props.is_active ?? true,
