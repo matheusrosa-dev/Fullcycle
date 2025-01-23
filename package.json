@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:watchAll": "jest --watchAll"
+    "test": "jest --coverage",
+    "test:watch": "jest --watch --coverage",
+    "test:watchAll": "jest --watchAll --coverage",
+    "tsc:check": "tsc --noEmit"
   },
   "keywords": [],
   "author": "",
