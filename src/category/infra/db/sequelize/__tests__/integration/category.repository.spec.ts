@@ -5,11 +5,11 @@ import { CategorySequelizeRepository } from "../../category.repository";
 import {
   Category,
   CategoryFactory,
-} from "../../../../../domain/category/category.entity";
+} from "../../../../../domain/category.entity";
 import {
   CategorySearchParams,
   CategorySearchResult,
-} from "../../../../../domain/category/category.repository";
+} from "../../../../../domain/category.repository";
 import { CategoryModelMapper } from "../../category-model-mapper";
 import { setupSequelize } from "../../../../../../shared/infra/testing/helpers";
 

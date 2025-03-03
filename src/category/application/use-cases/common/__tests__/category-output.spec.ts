@@ -1,4 +1,4 @@
-import { CategoryFactory } from "../../../../domain/category/category.entity";
+import { CategoryFactory } from "../../../../domain/category.entity";
 import { CategoryOutputMapper } from "../category-output";
 
 describe("CategoryOutputMapper Unit Tests", () => {

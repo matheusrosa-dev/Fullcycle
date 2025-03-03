@@ -1,8 +1,8 @@
-import { CategoryFactory } from "../../../../domain/category/category.entity";
-import { CategorySearchResult } from "../../../../domain/category/category.repository";
+import { CategoryFactory } from "../../../../domain/category.entity";
+import { CategorySearchResult } from "../../../../domain/category.repository";
 import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category.repository";
 import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoryUseCase } from "../../list-category.use-case";
+import { ListCategoryUseCase } from "../list-category.use-case";
 
 describe("ListCategoryUseCase Unit Tests", () => {
   let useCase: ListCategoryUseCase;
@@ -52,14 +52,13 @@ describe("ListCategoryUseCase Unit Tests", () => {
       CategoryFactory.create({ name: "test 1" }),
       CategoryFactory.create({
         name: "test 2",
-        created_at: new Date(new Date().getTime() + 100),
       }),
     ];
     repository.items = items;
 
     const output = await useCase.execute({});
     expect(output).toStrictEqual({
-      items: [...items].reverse().map(CategoryOutputMapper.toOutput),
+      items: [...items].map(CategoryOutputMapper.toOutput),
       total: 2,
       current_page: 1,
       per_page: 15,

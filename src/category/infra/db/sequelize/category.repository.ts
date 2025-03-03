@@ -1,10 +1,10 @@
 import { Op } from "sequelize";
 import { SearchParams } from "../../../../shared/domain/repository/search-params";
-import { Category } from "../../../domain/category/category.entity";
+import { Category } from "../../../domain/category.entity";
 import {
   CategorySearchResult,
   ICategoryRepository,
-} from "../../../domain/category/category.repository";
+} from "../../../domain/category.repository";
 import { CategoryModel } from "./category.model";
 import { CategoryModelMapper } from "./category-model-mapper";
 import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";

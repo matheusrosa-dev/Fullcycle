@@ -1,7 +1,7 @@
 import {
   Category,
   CategoryFactory,
-} from "../../../../../domain/category/category.entity";
+} from "../../../../../domain/category.entity";
 import { CategoryInMemoryRepository } from "../../category.repository";
 
 describe("CategoryInMemoryRepository", () => {
