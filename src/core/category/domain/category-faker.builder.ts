@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { Chance } from "chance";
 import { Category } from "./category.entity";
 import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
@@ -7,12 +11,12 @@ type PropOrFactory<T> = T | ((index: number) => T);
 export class CategoryFakeBuilder<TBuild = any> {
   private _category_id: PropOrFactory<Uuid> | undefined = undefined;
 
-  private _name: PropOrFactory<string> = (_index) => this.chance.word();
+  private _name: PropOrFactory<string> = () => this.chance.word();
 
-  private _description: PropOrFactory<string | null> = (_index) =>
+  private _description: PropOrFactory<string | null> = () =>
     this.chance.paragraph();
 
-  private _is_active: PropOrFactory<boolean> = (_index) => true;
+  private _is_active: PropOrFactory<boolean> = () => true;
 
   private _created_at: PropOrFactory<Date> | undefined = undefined;
 
@@ -86,7 +90,9 @@ export class CategoryFakeBuilder<TBuild = any> {
         category.validate();
         return category;
       });
-    return this.countObjs === 1 ? (categories[0] as any) : categories;
+    return (
+      this.countObjs === 1 ? (categories[0] as any) : categories
+    ) as TBuild;
   }
 
   get category_id() {
@@ -114,7 +120,7 @@ export class CategoryFakeBuilder<TBuild = any> {
     const privateProp = `_${prop}` as keyof this;
     if (!this[privateProp] && optional.includes(prop)) {
       throw new Error(
-        `Property ${prop} not have a factory, use 'with' methods`
+        `Property ${prop} not have a factory, use 'with' methods`,
       );
     }
     return this.callFactory(this[privateProp], 0);

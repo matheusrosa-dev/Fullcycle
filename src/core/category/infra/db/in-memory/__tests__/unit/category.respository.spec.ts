@@ -1,7 +1,4 @@
-import {
-  Category,
-  CategoryFactory,
-} from "../../../../../domain/category.entity";
+import { CategoryFactory } from "../../../../../domain/category.entity";
 import { CategoryInMemoryRepository } from "../../category.repository";
 
 describe("CategoryInMemoryRepository", () => {
@@ -12,7 +9,7 @@ describe("CategoryInMemoryRepository", () => {
     const items = [CategoryFactory.fake().aCategory().build()];
     const filterSpy = jest.spyOn(items, "filter" as any);
 
-    const itemsFiltered = await repository["applyFilter"](items, null);
+    const itemsFiltered = await repository["applyFilter"](items, null!);
     expect(filterSpy).not.toHaveBeenCalled();
     expect(itemsFiltered).toStrictEqual(items);
   });
@@ -51,7 +48,7 @@ describe("CategoryInMemoryRepository", () => {
         .build(),
     ];
 
-    const itemsSorted = await repository["applySort"](items, null, null);
+    const itemsSorted = repository["applySort"](items, null, null);
     expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
   });
 
@@ -62,10 +59,10 @@ describe("CategoryInMemoryRepository", () => {
       CategoryFactory.fake().aCategory().withName("a").build(),
     ];
 
-    let itemsSorted = await repository["applySort"](items, "name", "asc");
+    let itemsSorted = repository["applySort"](items, "name", "asc");
     expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
 
-    itemsSorted = await repository["applySort"](items, "name", "desc");
+    itemsSorted = repository["applySort"](items, "name", "desc");
     expect(itemsSorted).toStrictEqual([items[0], items[1], items[2]]);
   });
 });

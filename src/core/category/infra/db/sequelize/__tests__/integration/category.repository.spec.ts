@@ -24,10 +24,10 @@ describe("CategorySequelizeRepository Integration Test", () => {
   });
 
   it("should inserts a new entity", async () => {
-    let category = CategoryFactory.fake().aCategory().build();
+    const category = CategoryFactory.fake().aCategory().build();
     await repository.insert(category);
-    let entity = await repository.findById(category.category_id);
-    expect(entity.toJSON()).toStrictEqual(category.toJSON());
+    const entity = await repository.findById(category.category_id);
+    expect(entity!.toJSON()).toStrictEqual(category.toJSON());
   });
 
   it("should finds a entity by id", async () => {
@@ -37,7 +37,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
     const entity = CategoryFactory.fake().aCategory().build();
     await repository.insert(entity);
     entityFound = await repository.findById(entity.category_id);
-    expect(entity.toJSON()).toStrictEqual(entityFound.toJSON());
+    expect(entity.toJSON()).toStrictEqual(entityFound!.toJSON());
   });
 
   it("should return all categories", async () => {
@@ -51,7 +51,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
   it("should throw error on update when a entity not found", async () => {
     const entity = CategoryFactory.fake().aCategory().build();
     await expect(repository.update(entity)).rejects.toThrow(
-      new NotFoundError(entity.category_id.id, Category)
+      new NotFoundError(entity.category_id.id, Category),
     );
   });
 
@@ -63,13 +63,13 @@ describe("CategorySequelizeRepository Integration Test", () => {
     await repository.update(entity);
 
     const entityFound = await repository.findById(entity.category_id);
-    expect(entity.toJSON()).toStrictEqual(entityFound.toJSON());
+    expect(entity.toJSON()).toStrictEqual(entityFound!.toJSON());
   });
 
   it("should throw error on delete when a entity not found", async () => {
     const categoryId = new Uuid();
     await expect(repository.delete(categoryId)).rejects.toThrow(
-      new NotFoundError(categoryId.id, Category)
+      new NotFoundError(categoryId.id, Category),
     );
   });
 
@@ -113,7 +113,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
           description: null,
           is_active: true,
           created_at: created_at,
-        })
+        }),
       );
     });
 
@@ -163,7 +163,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
           page: 1,
           per_page: 2,
           filter: "TEST",
-        })
+        }),
       );
       expect(searchOutput.toJSON(true)).toMatchObject(
         new CategorySearchResult({
@@ -171,7 +171,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
           total: 3,
           current_page: 1,
           per_page: 2,
-        }).toJSON(true)
+        }).toJSON(true),
       );
 
       searchOutput = await repository.search(
@@ -179,7 +179,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
           page: 2,
           per_page: 2,
           filter: "TEST",
-        })
+        }),
       );
       expect(searchOutput.toJSON(true)).toMatchObject(
         new CategorySearchResult({
@@ -187,7 +187,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
           total: 3,
           current_page: 2,
           per_page: 2,
-        }).toJSON(true)
+        }).toJSON(true),
       );
     });
 
@@ -315,7 +315,7 @@ describe("CategorySequelizeRepository Integration Test", () => {
         async ({ search_params, search_result }) => {
           const result = await repository.search(search_params);
           expect(result.toJSON(true)).toMatchObject(search_result.toJSON(true));
-        }
+        },
       );
     });
   });

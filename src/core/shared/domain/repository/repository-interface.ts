@@ -9,7 +9,7 @@ export interface IRepository<E extends Entity, EntityId extends ValueObject> {
   update(entity: E): Promise<void>;
   delete(id: EntityId): Promise<void>;
 
-  findById(id: EntityId): Promise<E>;
+  findById(id: EntityId): Promise<E | null>;
   findAll(): Promise<E[]>;
 
   getEntity(): new (...args: any[]) => E;
@@ -20,7 +20,7 @@ export interface ISearchableRepository<
   EntityId extends ValueObject,
   Filter = string,
   SearchInput = SearchParams<Filter>,
-  SearchOutput = SearchResult
+  SearchOutput = SearchResult,
 > extends IRepository<E, EntityId> {
   sortableFields: string[];
   search(props: SearchInput): Promise<SearchOutput>;

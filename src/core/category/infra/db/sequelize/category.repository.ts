@@ -27,7 +27,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 
   async bulkInsert(entities: Category[]) {
     const models = entities.map((entity) =>
-      CategoryModelMapper.toModel(entity)
+      CategoryModelMapper.toModel(entity),
     );
 
     await this.categoryModel.bulkCreate(models);
@@ -80,7 +80,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
     if (!models?.length) return [];
 
     const categories = models.map((model) =>
-      CategoryModelMapper.toEntity(model)
+      CategoryModelMapper.toEntity(model),
     );
 
     return categories;
@@ -100,9 +100,10 @@ export class CategorySequelizeRepository implements ICategoryRepository {
           name: { [Op.like]: `%${props.filter}%` },
         },
       }),
+
       ...(props.sort && this.sortableFields.includes(props.sort)
         ? {
-            order: [[props.sort, props.sort_dir]],
+            order: [[props.sort, props.sort_dir as string]],
           }
         : {
             order: [["created_at", "desc"]],
