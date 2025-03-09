@@ -1,17 +1,17 @@
-import { Op } from "sequelize";
-import { SearchParams } from "../../../../shared/domain/repository/search-params";
-import { Category } from "../../../domain/category.entity";
+import { Op } from 'sequelize';
+import { SearchParams } from '../../../../shared/domain/repository/search-params';
+import { Category } from '../../../domain/category.entity';
 import {
   CategorySearchResult,
   ICategoryRepository,
-} from "../../../domain/category.repository";
-import { CategoryModel } from "./category.model";
-import { CategoryModelMapper } from "./category-model-mapper";
-import { NotFoundError } from "../../../../shared/domain/errors/not-found.error";
-import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
+} from '../../../domain/category.repository';
+import { CategoryModel } from './category.model';
+import { CategoryModelMapper } from './category-model-mapper';
+import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 
 export class CategorySequelizeRepository implements ICategoryRepository {
-  sortableFields = ["name", "created_at"];
+  sortableFields = ['name', 'created_at'];
 
   constructor(private categoryModel: typeof CategoryModel) {}
 
@@ -106,7 +106,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
             order: [[props.sort, props.sort_dir as string]],
           }
         : {
-            order: [["created_at", "desc"]],
+            order: [['created_at', 'desc']],
           }),
       limit,
       offset,

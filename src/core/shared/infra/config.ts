@@ -1,6 +1,6 @@
-import { config as readEnv } from "dotenv";
-import { join } from "path";
-import { SequelizeOptions } from "sequelize-typescript";
+import { config as readEnv } from 'dotenv';
+import { join } from 'path';
+import { SequelizeOptions } from 'sequelize-typescript';
 
 export class Config {
   static env: any = null;
@@ -9,9 +9,9 @@ export class Config {
     Config.readEnv();
 
     return {
-      dialect: "sqlite" as SequelizeOptions["dialect"],
+      dialect: 'sqlite' as SequelizeOptions['dialect'],
       storage: Config.env.DB_STORAGE,
-      logging: Config.env.DB_LOGGING === "true",
+      logging: Config.env.DB_LOGGING === 'true',
     };
   }
 
