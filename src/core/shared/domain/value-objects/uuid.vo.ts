@@ -1,11 +1,11 @@
-import * as uuid from "uuid";
+import * as uuid from 'uuid';
 
-import { ValueObject } from "./value-object";
+import { ValueObject } from './value-object';
 
 export class InvalidUuidError extends Error {
   constructor(message?: string) {
-    super(message || "id must be a valid uuid");
-    this.name = "InvalidUuidError";
+    super(message || 'id must be a valid uuid');
+    this.name = 'InvalidUuidError';
   }
 }
 

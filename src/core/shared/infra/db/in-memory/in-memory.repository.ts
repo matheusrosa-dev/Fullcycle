@@ -1,15 +1,15 @@
-import { Entity } from "../../../domain/entities/entity";
-import { NotFoundError } from "../../../domain/errors/not-found.error";
+import { Entity } from '../../../domain/entities/entity';
+import { NotFoundError } from '../../../domain/errors/not-found.error';
 import {
   IRepository,
   ISearchableRepository,
-} from "../../../domain/repository/repository-interface";
+} from '../../../domain/repository/repository-interface';
 import {
   SearchParams,
   SortDirection,
-} from "../../../domain/repository/search-params";
-import { SearchResult } from "../../../domain/repository/search-result";
-import { ValueObject } from "../../../domain/value-objects/value-object";
+} from '../../../domain/repository/search-params';
+import { SearchResult } from '../../../domain/repository/search-result';
+import { ValueObject } from '../../../domain/value-objects/value-object';
 
 export abstract class InMemoryRepository<
   E extends Entity,
@@ -47,7 +47,7 @@ export abstract class InMemoryRepository<
 
   async findById(entity_id: EntityId) {
     const item = this.items.find((item) => item.entity_id.equals(entity_id));
-    return typeof item === "undefined" ? null : item;
+    return typeof item === 'undefined' ? null : item;
   }
 
   async findAll(): Promise<any[]> {
@@ -92,8 +92,8 @@ export abstract class InMemorySearchableRepository<
 
   protected applyPaginate(
     items: E[],
-    page: SearchParams["page"],
-    per_page: SearchParams["per_page"],
+    page: SearchParams['page'],
+    per_page: SearchParams['per_page'],
   ) {
     const start = (page - 1) * per_page; // 0 * 15 = 0
     const limit = start + per_page; // 0 + 15 = 15
@@ -116,11 +116,11 @@ export abstract class InMemorySearchableRepository<
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const bValue = custom_getter ? custom_getter(sort, b) : b[sort];
       if (aValue < bValue) {
-        return sort_dir === "asc" ? -1 : 1;
+        return sort_dir === 'asc' ? -1 : 1;
       }
 
       if (aValue > bValue) {
-        return sort_dir === "asc" ? 1 : -1;
+        return sort_dir === 'asc' ? 1 : -1;
       }
 
       return 0;

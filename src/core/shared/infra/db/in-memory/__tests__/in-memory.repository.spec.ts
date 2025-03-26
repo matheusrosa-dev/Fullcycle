@@ -1,7 +1,7 @@
-import { Entity } from "../../../../domain/entities/entity";
-import { NotFoundError } from "../../../../domain/errors/not-found.error";
-import { Uuid } from "../../../../domain/value-objects/uuid.vo";
-import { InMemoryRepository } from "../in-memory.repository";
+import { Entity } from '../../../../domain/entities/entity';
+import { NotFoundError } from '../../../../domain/errors/not-found.error';
+import { Uuid } from '../../../../domain/value-objects/uuid.vo';
+import { InMemoryRepository } from '../in-memory.repository';
 
 type StubEntityConstructor = {
   entity_id?: Uuid;
@@ -36,17 +36,17 @@ class StubInMemoryRepository extends InMemoryRepository<StubEntity, Uuid> {
   }
 }
 
-describe("InMemoryRepository Unit Tests", () => {
+describe('InMemoryRepository Unit Tests', () => {
   let repo: StubInMemoryRepository;
 
   beforeEach(() => {
     repo = new StubInMemoryRepository();
   });
 
-  test("should insert a new entity", async () => {
+  test('should insert a new entity', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
@@ -56,16 +56,16 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(repo.items[0].toJSON()).toEqual(entity.toJSON());
   });
 
-  test("should bulk insert entities", async () => {
+  test('should bulk insert entities', async () => {
     const entities = [
       new StubEntity({
         entity_id: new Uuid(),
-        name: "Product 1",
+        name: 'Product 1',
         price: 100,
       }),
       new StubEntity({
         entity_id: new Uuid(),
-        name: "Product 2",
+        name: 'Product 2',
         price: 200,
       }),
     ];
@@ -77,10 +77,10 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(repo.items[1].toJSON()).toEqual(entities[1].toJSON());
   });
 
-  test("should update an entity", async () => {
+  test('should update an entity', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
@@ -88,7 +88,7 @@ describe("InMemoryRepository Unit Tests", () => {
 
     const updatedEntity = new StubEntity({
       entity_id: entity.entity_id,
-      name: "Product 2",
+      name: 'Product 2',
       price: 200,
     });
 
@@ -98,22 +98,22 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(repo.items[0].toJSON()).toEqual(updatedEntity.toJSON());
   });
 
-  test("should throw an error when updating a non-existent entity", async () => {
+  test('should throw an error when updating a non-existent entity', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
     await expect(repo.update(entity)).rejects.toThrow(
-      new NotFoundError(entity.entity_id.id, StubEntity)
+      new NotFoundError(entity.entity_id.id, StubEntity),
     );
   });
 
-  test("should delete an entity", async () => {
+  test('should delete an entity', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
@@ -124,22 +124,22 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(repo.items).toHaveLength(0);
   });
 
-  test("should throw an error when deleting a non-existent entity", async () => {
+  test('should throw an error when deleting a non-existent entity', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
     await expect(repo.delete(entity.entity_id)).rejects.toThrow(
-      new NotFoundError(entity.entity_id.id, StubEntity)
+      new NotFoundError(entity.entity_id.id, StubEntity),
     );
   });
 
-  test("should find an entity by id", async () => {
+  test('should find an entity by id', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
@@ -150,10 +150,10 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(foundEntity).toEqual(entity);
   });
 
-  test("should return null when finding a non-existent entity by id", async () => {
+  test('should return null when finding a non-existent entity by id', async () => {
     const entity = new StubEntity({
       entity_id: new Uuid(),
-      name: "Product 1",
+      name: 'Product 1',
       price: 100,
     });
 
@@ -162,16 +162,16 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(foundEntity).toBeNull();
   });
 
-  test("should find all entities", async () => {
+  test('should find all entities', async () => {
     const entities = [
       new StubEntity({
         entity_id: new Uuid(),
-        name: "Product 1",
+        name: 'Product 1',
         price: 100,
       }),
       new StubEntity({
         entity_id: new Uuid(),
-        name: "Product 2",
+        name: 'Product 2',
         price: 200,
       }),
     ];
@@ -183,13 +183,13 @@ describe("InMemoryRepository Unit Tests", () => {
     expect(foundEntities).toEqual(entities);
   });
 
-  test("should return an empty array when finding all entities", async () => {
+  test('should return an empty array when finding all entities', async () => {
     const foundEntities = await repo.findAll();
 
     expect(foundEntities).toEqual([]);
   });
 
-  test("should get entity class", () => {
+  test('should get entity class', () => {
     expect(repo.getEntity()).toBe(StubEntity);
   });
 });

@@ -17,6 +17,8 @@ type DB_SCHEMA_TYPE = {
   DB_AUTO_LOAD_MODELS: boolean;
 };
 
+export type CONFIG_SCHEMA_TYPE = DB_SCHEMA_TYPE;
+
 export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
   DB_VENDOR: Joi.string().required().valid('mysql', 'sqlite'),
   DB_HOST: Joi.string().required(),
@@ -32,7 +34,7 @@ export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
     is: 'mysql',
     then: Joi.required(),
   }),
-  DB_PORT: Joi.number().when('DB_VENDOR', {
+  DB_PORT: Joi.number().integer().when('DB_VENDOR', {
     is: 'mysql',
     then: Joi.required(),
   }),
@@ -44,14 +46,17 @@ export const CONFIG_DB_SCHEMA: Joi.StrictSchemaMap<DB_SCHEMA_TYPE> = {
 export class ConfigModule extends NestConfigModule {
   static forRoot(options: ConfigModuleOptions = {}) {
     const { envFilePath, ...otherOptions } = options;
+
     return super.forRoot({
       isGlobal: true,
       envFilePath: [
-        ...(Array.isArray(envFilePath) ? envFilePath : [envFilePath as string]),
-        join(process.cwd(), 'envs', `.env.${process.env.NODE_ENV}`),
+        ...(Array.isArray(envFilePath) ? envFilePath : [envFilePath!]),
+        join(process.cwd(), 'envs', `.env.${process.env.NODE_ENV!}`),
         join(process.cwd(), 'envs', '.env'),
       ],
-      validationSchema: Joi.object(CONFIG_DB_SCHEMA),
+      validationSchema: Joi.object({
+        ...CONFIG_DB_SCHEMA,
+      }),
       ...otherOptions,
     });
   }

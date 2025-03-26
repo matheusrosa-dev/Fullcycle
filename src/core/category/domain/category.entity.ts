@@ -1,9 +1,9 @@
-import { Entity } from "../../shared/domain/entities/entity";
-import { Uuid } from "../../shared/domain/value-objects/uuid.vo";
-import { ValueObject } from "../../shared/domain/value-objects/value-object";
-import { CategoryFakeBuilder } from "./category-faker.builder";
-import { CategoryValidatorFactory } from "./category.validator";
-import { CategoryConstructorProps, CategoryCreateCommand } from "./types";
+import { Entity } from '../../shared/domain/entities/entity';
+import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
+import { ValueObject } from '../../shared/domain/value-objects/value-object';
+import { CategoryFakeBuilder } from './category-faker.builder';
+import { CategoryValidatorFactory } from './category.validator';
+import { CategoryConstructorProps, CategoryCreateCommand } from './types';
 
 export class Category extends Entity {
   category_id: Uuid;
@@ -28,13 +28,13 @@ export class Category extends Entity {
   static create(props: CategoryCreateCommand): Category {
     const category = new Category(props);
     //category.validate();
-    category.validate(["name"]);
+    category.validate(['name']);
     return category;
   }
 
   changeName(name: string): void {
     this.name = name;
-    this.validate(["name"]);
+    this.validate(['name']);
   }
 
   changeDescription(description: string): void {
@@ -79,7 +79,7 @@ export class CategoryFactory {
       created_at: new Date(),
     });
 
-    category.validate(["name"]);
+    category.validate(['name']);
 
     return category;
   }

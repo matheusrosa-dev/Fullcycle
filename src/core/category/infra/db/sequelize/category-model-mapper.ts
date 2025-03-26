@@ -1,7 +1,7 @@
-import { EntityValidationError } from "../../../../shared/domain/validators/validation.error";
-import { Uuid } from "../../../../shared/domain/value-objects/uuid.vo";
-import { Category } from "../../../domain/category.entity";
-import { CategoryModel, CategoryModelProps } from "./category.model";
+import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import { Category } from '../../../domain/category.entity';
+import { CategoryModel, CategoryModelProps } from './category.model';
 
 export class CategoryModelMapper {
   static toModel(entity: Category): CategoryModelProps {

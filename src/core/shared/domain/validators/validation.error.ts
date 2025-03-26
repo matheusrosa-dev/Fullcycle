@@ -1,11 +1,11 @@
-import { FieldsErrors } from "./types";
+import { FieldsErrors } from './types';
 
 export class ValidationError extends Error {}
 
 export class EntityValidationError extends Error {
   constructor(
     public error: FieldsErrors[],
-    message = "Entity Validation Error"
+    message = 'Entity Validation Error',
   ) {
     super(message);
   }

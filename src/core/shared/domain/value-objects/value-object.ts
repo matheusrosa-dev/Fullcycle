@@ -1,7 +1,7 @@
-import { isEqual } from "lodash";
+import { isEqual } from 'lodash';
 
 export abstract class ValueObject {
-  equals(vo: this) {
+  public equals(vo: this): boolean {
     if (vo === null || vo === undefined) {
       return false;
     }
@@ -10,6 +10,7 @@ export abstract class ValueObject {
       return false;
     }
 
-    return isEqual(this, vo);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call
+    return isEqual(vo, this);
   }
 }

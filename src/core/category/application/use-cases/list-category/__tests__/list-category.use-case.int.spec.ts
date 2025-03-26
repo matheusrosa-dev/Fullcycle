@@ -1,11 +1,12 @@
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
-import { CategoryFactory } from "../../../../domain/category.entity";
-import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
-import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category.repository";
-import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoryUseCase } from "../list-category.use-case";
+/* eslint-disable @typescript-eslint/unbound-method */
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
+import { CategoryFactory } from '../../../../domain/category.entity';
+import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
+import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category.repository';
+import { CategoryOutputMapper } from '../../common/category-output';
+import { ListCategoryUseCase } from '../list-category.use-case';
 
-describe("ListCategoryUseCase Integration Tests", () => {
+describe('ListCategoryUseCase Integration Tests', () => {
   let useCase: ListCategoryUseCase;
   let repository: CategorySequelizeRepository;
 
@@ -16,7 +17,7 @@ describe("ListCategoryUseCase Integration Tests", () => {
     useCase = new ListCategoryUseCase(repository);
   });
 
-  it("should return output sorted by created_at when input param is empty", async () => {
+  it('should return output sorted by created_at when input param is empty', async () => {
     const categories = CategoryFactory.fake()
       .theCategories(2)
       .withCreatedAt((i) => new Date(new Date().getTime() + 1000 + i))
@@ -33,20 +34,20 @@ describe("ListCategoryUseCase Integration Tests", () => {
     });
   });
 
-  it("should returns output using pagination, sort and filter", async () => {
+  it('should returns output using pagination, sort and filter', async () => {
     const categories = [
-      CategoryFactory.create({ name: "a" }),
+      CategoryFactory.create({ name: 'a' }),
       CategoryFactory.create({
-        name: "AAA",
+        name: 'AAA',
       }),
       CategoryFactory.create({
-        name: "AaA",
+        name: 'AaA',
       }),
       CategoryFactory.create({
-        name: "b",
+        name: 'b',
       }),
       CategoryFactory.create({
-        name: "c",
+        name: 'c',
       }),
     ];
     await repository.bulkInsert(categories);
@@ -54,8 +55,8 @@ describe("ListCategoryUseCase Integration Tests", () => {
     let output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
     expect(output).toEqual({
       items: [categories[1], categories[2]].map(CategoryOutputMapper.toOutput),
@@ -68,8 +69,8 @@ describe("ListCategoryUseCase Integration Tests", () => {
     output = await useCase.execute({
       page: 2,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
     expect(output).toEqual({
       items: [categories[0]].map(CategoryOutputMapper.toOutput),
@@ -82,9 +83,9 @@ describe("ListCategoryUseCase Integration Tests", () => {
     output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      sort_dir: "desc",
-      filter: "a",
+      sort: 'name',
+      sort_dir: 'desc',
+      filter: 'a',
     });
     expect(output).toEqual({
       items: [categories[0], categories[2]].map(CategoryOutputMapper.toOutput),

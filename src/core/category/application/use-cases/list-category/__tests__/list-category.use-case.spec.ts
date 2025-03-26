@@ -1,10 +1,11 @@
-import { CategoryFactory } from "../../../../domain/category.entity";
-import { CategorySearchResult } from "../../../../domain/category.repository";
-import { CategoryInMemoryRepository } from "../../../../infra/db/in-memory/category.repository";
-import { CategoryOutputMapper } from "../../common/category-output";
-import { ListCategoryUseCase } from "../list-category.use-case";
+/* eslint-disable @typescript-eslint/unbound-method */
+import { CategoryFactory } from '../../../../domain/category.entity';
+import { CategorySearchResult } from '../../../../domain/category.repository';
+import { CategoryInMemoryRepository } from '../../../../infra/db/in-memory/category.repository';
+import { CategoryOutputMapper } from '../../common/category-output';
+import { ListCategoryUseCase } from '../list-category.use-case';
 
-describe("ListCategoryUseCase Unit Tests", () => {
+describe('ListCategoryUseCase Unit Tests', () => {
   let useCase: ListCategoryUseCase;
   let repository: CategoryInMemoryRepository;
 
@@ -13,14 +14,14 @@ describe("ListCategoryUseCase Unit Tests", () => {
     useCase = new ListCategoryUseCase(repository);
   });
 
-  test("toOutput method", () => {
+  test('toOutput method', () => {
     let result = new CategorySearchResult({
       items: [],
       total: 1,
       current_page: 1,
       per_page: 2,
     });
-    let output = useCase["toOutput"](result);
+    let output = useCase['toOutput'](result);
     expect(output).toStrictEqual({
       items: [],
       total: 1,
@@ -29,7 +30,7 @@ describe("ListCategoryUseCase Unit Tests", () => {
       last_page: 1,
     });
 
-    const entity = CategoryFactory.create({ name: "Movie" });
+    const entity = CategoryFactory.create({ name: 'Movie' });
     result = new CategorySearchResult({
       items: [entity],
       total: 1,
@@ -37,7 +38,7 @@ describe("ListCategoryUseCase Unit Tests", () => {
       per_page: 2,
     });
 
-    output = useCase["toOutput"](result);
+    output = useCase['toOutput'](result);
     expect(output).toStrictEqual({
       items: [entity].map(CategoryOutputMapper.toOutput),
       total: 1,
@@ -47,11 +48,11 @@ describe("ListCategoryUseCase Unit Tests", () => {
     });
   });
 
-  it("should return output sorted by created_at when input param is empty", async () => {
+  it('should return output sorted by created_at when input param is empty', async () => {
     const items = [
-      CategoryFactory.create({ name: "test 1" }),
+      CategoryFactory.create({ name: 'test 1' }),
       CategoryFactory.create({
-        name: "test 2",
+        name: 'test 2',
       }),
     ];
     repository.items = items;
@@ -66,20 +67,20 @@ describe("ListCategoryUseCase Unit Tests", () => {
     });
   });
 
-  it("should return output using pagination, sort and filter", async () => {
+  it('should return output using pagination, sort and filter', async () => {
     const items = [
-      CategoryFactory.create({ name: "a" }),
+      CategoryFactory.create({ name: 'a' }),
       CategoryFactory.create({
-        name: "AAA",
+        name: 'AAA',
       }),
       CategoryFactory.create({
-        name: "AaA",
+        name: 'AaA',
       }),
       CategoryFactory.create({
-        name: "b",
+        name: 'b',
       }),
       CategoryFactory.create({
-        name: "c",
+        name: 'c',
       }),
     ];
     repository.items = items;
@@ -87,8 +88,8 @@ describe("ListCategoryUseCase Unit Tests", () => {
     let output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
     expect(output).toStrictEqual({
       items: [items[1], items[2]].map(CategoryOutputMapper.toOutput),
@@ -101,8 +102,8 @@ describe("ListCategoryUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 2,
       per_page: 2,
-      sort: "name",
-      filter: "a",
+      sort: 'name',
+      filter: 'a',
     });
     expect(output).toStrictEqual({
       items: [items[0]].map(CategoryOutputMapper.toOutput),
@@ -115,9 +116,9 @@ describe("ListCategoryUseCase Unit Tests", () => {
     output = await useCase.execute({
       page: 1,
       per_page: 2,
-      sort: "name",
-      sort_dir: "desc",
-      filter: "a",
+      sort: 'name',
+      sort_dir: 'desc',
+      filter: 'a',
     });
     expect(output).toStrictEqual({
       items: [items[0], items[2]].map(CategoryOutputMapper.toOutput),

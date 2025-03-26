@@ -8,10 +8,15 @@ export class Config {
   static db() {
     Config.readEnv();
 
+    const configEnv = Config.env as {
+      DB_STORAGE: string;
+      DB_LOGGING: string;
+    };
+
     return {
       dialect: 'sqlite' as SequelizeOptions['dialect'],
-      storage: Config.env.DB_STORAGE,
-      logging: Config.env.DB_LOGGING === 'true',
+      storage: configEnv.DB_STORAGE,
+      logging: configEnv.DB_LOGGING === 'true',
     };
   }
 

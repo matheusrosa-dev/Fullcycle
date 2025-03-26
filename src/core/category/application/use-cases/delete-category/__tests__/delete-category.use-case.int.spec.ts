@@ -1,12 +1,12 @@
-import { NotFoundError } from "../../../../../shared/domain/errors/not-found.error";
-import { Uuid } from "../../../../../shared/domain/value-objects/uuid.vo";
-import { setupSequelize } from "../../../../../shared/infra/testing/helpers";
-import { Category, CategoryFactory } from "../../../../domain/category.entity";
-import { CategoryModel } from "../../../../infra/db/sequelize/category.model";
-import { CategorySequelizeRepository } from "../../../../infra/db/sequelize/category.repository";
-import { DeleteCategoryUseCase } from "../delete-category.use-case";
+import { NotFoundError } from '../../../../../shared/domain/errors/not-found.error';
+import { Uuid } from '../../../../../shared/domain/value-objects/uuid.vo';
+import { setupSequelize } from '../../../../../shared/infra/testing/helpers';
+import { Category, CategoryFactory } from '../../../../domain/category.entity';
+import { CategoryModel } from '../../../../infra/db/sequelize/category.model';
+import { CategorySequelizeRepository } from '../../../../infra/db/sequelize/category.repository';
+import { DeleteCategoryUseCase } from '../delete-category.use-case';
 
-describe("DeleteCategoryUseCase Integration Tests", () => {
+describe('DeleteCategoryUseCase Integration Tests', () => {
   let useCase: DeleteCategoryUseCase;
   let repository: CategorySequelizeRepository;
 
@@ -17,14 +17,14 @@ describe("DeleteCategoryUseCase Integration Tests", () => {
     useCase = new DeleteCategoryUseCase(repository);
   });
 
-  it("should throws error when entity not found", async () => {
+  it('should throws error when entity not found', async () => {
     const uuid = new Uuid();
     await expect(() => useCase.execute({ id: uuid.id })).rejects.toThrow(
-      new NotFoundError(uuid.id, Category)
+      new NotFoundError(uuid.id, Category),
     );
   });
 
-  it("should delete a category", async () => {
+  it('should delete a category', async () => {
     const category = CategoryFactory.fake().aCategory().build();
     await repository.insert(category);
     await useCase.execute({

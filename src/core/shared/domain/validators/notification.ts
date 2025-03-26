@@ -4,6 +4,7 @@ export class Notification {
   addError(error: string, field?: string) {
     if (field) {
       const errors = (this.errors.get(field) ?? []) as string[];
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       errors.indexOf(error) === -1 && errors.push(error);
       this.errors.set(field, errors);
     } else {
@@ -38,7 +39,7 @@ export class Notification {
   toJSON() {
     const errors: Array<string | { [key: string]: string[] }> = [];
     this.errors.forEach((value, key) => {
-      if (typeof value === "string") {
+      if (typeof value === 'string') {
         errors.push(value);
       } else {
         errors.push({ [key]: value });

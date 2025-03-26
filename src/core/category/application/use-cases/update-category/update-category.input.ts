@@ -4,7 +4,7 @@ import {
   IsOptional,
   IsString,
   validateSync,
-} from "class-validator";
+} from 'class-validator';
 
 type UpdateCategoryInputConstructorProps = {
   id: string;
@@ -33,8 +33,11 @@ export class UpdateCategoryInput {
   constructor(props?: UpdateCategoryInputConstructorProps) {
     if (!props) return;
     this.id = props.id;
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     props.name && (this.name = props.name);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     props.description && (this.description = props.description);
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     props.is_active !== null &&
       props.is_active !== undefined &&
       (this.is_active = props.is_active);

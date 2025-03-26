@@ -1,5 +1,5 @@
-import { Entity } from "../entities/entity";
-import { ValueObject } from "../value-objects/value-object";
+import { Entity } from '../entities/entity';
+import { ValueObject } from '../value-objects/value-object';
 
 type SearchResultConstructorProps<E extends Entity> = {
   items: E[];
@@ -26,6 +26,7 @@ export class SearchResult<E extends Entity = Entity> extends ValueObject {
 
   toJSON(forceEntity = false) {
     return {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       items: forceEntity ? this.items.map((item) => item.toJSON()) : this.items,
       total: this.total,
       current_page: this.current_page,
